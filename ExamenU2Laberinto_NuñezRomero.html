@@ -1,0 +1,195 @@
+<!DOCTYPE html> 
+<html>
+    <!-- MARIELENA NUÑEZ ROMERO
+        PROGRAMACION AVANZADA EN INTERNET
+        Opción 1: L A B E R I N T O
+        Requisitos:
+        - Contar el tiempo a partir de la carga del juego.
+        - Tener una temática original 
+        - Tiene que tener 2 posibles rutas alternas.
+        - Debe ser original (es decir no copia de un compañero).
+        - Se puede usar generador en nivel medio y difícil
+        - Debe tener un sonido de llegar a la meta
+       -  Debe tener música ambiental. 
+    -->
+    <head>
+        <style>
+            canvas{
+                background-color: rgb(142, 225, 77);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="mycanvas" width="1000" height="500"></canvas>
+        <script>
+// --------- V A R I A B L E S -----------------------------
+            var canvas = document.getElementById('mycanvas'); 
+            var ctx = canvas.getContext('2d');
+
+            var dir = 0;
+            var w_x = 100, w_y = 70;
+            var speed = 1.5;
+            let walls = [];
+            let pause = false;
+            let score = 0;
+            let time = 0;
+            let image = new Image();
+            image.src = "conejito.png";
+            let image2 = new Image();
+            image2.src = "zanahoria.png";
+            let audio = new Audio();
+            audio.src = "coin.mp3";
+
+// --------- C L A S E   R E C T A N G U L O  -----------------------------
+            class Rectangulo{
+                constructor(x,y,w,h,c){
+                    this.x = x;
+                    this.y = y;
+                    this.w = w;
+                    this.h = h;
+                    this.c = c;
+                }
+                paint(ctx){
+                    ctx.fillStyle = this.c;
+                    ctx.fillRect (this.x, this.y, this.w, this.h);
+                    ctx.strokeRect(this.x, this.y, this.w, this.h);
+                }
+                seTocan(objetivo){
+                    if(this.x < objetivo.x + objetivo.w &&
+                        this.x + this.w > objetivo.x &&
+                        this.y < objetivo.y + objetivo.h &&
+                        this.y + this.h  > objetivo.y)
+                        {
+                            return true;
+                        }
+                    return false;
+                }
+            }
+
+            const player = new Rectangulo (0,0,40,40,"black"); 
+            const objetivo = new Rectangulo (950,450,30,30,"blue");
+
+            walls.push(new Rectangulo (140,20,100,20,"gray")); //Obtaculos
+            walls.push(new Rectangulo (140,50,100,20,"gray")); //Obtaculos
+            walls.push(new Rectangulo (20,90,20,100,"gray")); //Obtaculos
+            walls.push(new Rectangulo (50,90,20,100,"gray")); //Obtaculos
+
+// --------- E V E N T O S   D E L   T E C L A D O  -----------------------------
+            document.addEventListener("keydown",(e) =>{
+                console.log(e);
+                switch(e.keyCode){
+                    case 38: //arriba
+                        if (!pause) dir = e.keyCode;
+                    break;
+                    case 40: // abajo
+                        if (!pause) dir = e.keyCode;               
+                    break;
+                    case 39: // derecha
+                        if (!pause) dir = e.keyCode;
+                    break;
+                    case 37: //izquierda
+                        if (!pause) dir = e.keyCode;                    
+                        break;
+                    case 32: //espacio
+                        pause = !pause;
+                    break;
+                }
+            })
+// ------------------ F U N C I O N E S  -----------------------------
+            function update(){
+                if (!pause){
+                    switch(dir){
+                        case 38: //arriba
+                            player.y -= speed;
+                            if(player.y < -50){player.y = 550}
+                        break;
+                        case 40: // abajo
+                            player.y += speed;
+                            if(player.y > 550){player.y = 0}
+                        break;
+                        case 39: // derecha
+                            player.x += speed;
+                            if(player.x > 1010){player.x = 0}
+                        break;
+                        case 37: //izquierda
+                            player.x -= speed;
+                            if(player.x < -50){player.x = 1010;}
+                        break;
+                    }
+
+                    if(player.seTocan(objetivo)){
+                        objetivo.x = Math.random() * (460);
+                        objetivo.y = Math.random() * (460);
+                        score += 100;
+                        audio.play();
+                    }
+
+                    for (var i = walls.length-1; i >= 0; i--) {
+                        if (player.seTocan(walls[i])){
+                            switch(dir){
+                                case 38: //arriba
+                                    player.y+= speed;
+                                break;
+                                case 40: // abajo
+                                    player.y-= speed;
+                                break;
+                                case 39: // derecha
+                                    player.x-= speed;
+                                break;
+                                case 37: //izquierda
+                                    player.x+= speed;
+                                break;
+                            }
+                            dir = 0;
+                        } 
+                    }
+                }
+                repaint();
+                window.requestAnimationFrame(update);
+            }
+            function repaint(){
+                
+                if (!pause){
+                    ctx.fillStyle = "rgb(142, 225, 77)";
+                    ctx.fillRect (0, 0, 1010, 550);
+                    ctx.fillStyle = "black";
+                    ctx.font = "15px Tahoma"; //SCORE
+                    ctx.fillText("S C O R E: "+score, 780, 25);
+                    ctx.font = "15px Tahoma"; //SCORE
+                    ctx.fillText("T I M E: "+time, 920, 25);
+                    
+                    ctx.drawImage(image,player.x,player.y,50,50);
+
+                    ctx.drawImage(image2,objetivo.x,objetivo.y,40,40);
+
+                    for (var i = walls.length-1; i >= 0; i--) {
+                        walls[i].paint(ctx);   
+                    }
+
+                }else{
+                    ctx.fillStyle = "RGBA(165, 165, 165 ,0.010)";
+                    ctx.fillRect (0, 0, 1010, 550);
+
+                    ctx.fillStyle = "BLACK" 
+                    ctx.font = "30px Tahoma"; //PAUSE
+                    ctx.fillText("P  A  U  S  E ", 320, 230);
+                }
+            }
+
+            window.requestAnimationFrame = (function () {
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 17);
+                    };
+            }());
+            window.requestAnimationFrame(update);
+            
+            function random_rgba() {
+                var o = Math.round, r = Math.random, s = 255;
+                return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            }
+        </script>        
+    </body>
+</html>
