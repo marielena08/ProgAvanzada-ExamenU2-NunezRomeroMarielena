@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html>
     <!-- MARIELENA NUÑEZ ROMERO
-        PROGRAMACION AVANZADA EN INTERNET - 7mo
+        PROGRAMACION AVANZADA EN INTERNET
         Opción 1: L A B E R I N T O
         Requisitos:
         - Contar el tiempo a partir de la carga del juego.
@@ -20,7 +20,7 @@
         </style>
     </head>
     <body>
-        <canvas id="mycanvas" width="1000" height="500"></canvas>
+        <canvas id="mycanvas" width="1000" height="950"></canvas>
         <script>
 // --------- V A R I A B L E S -----------------------------
             var canvas = document.getElementById('mycanvas'); 
@@ -66,13 +66,69 @@
                 }
             }
 
-            const player = new Rectangulo (0,0,40,40,"black"); 
-            const objetivo = new Rectangulo (950,450,30,30,"blue");
+            const player = new Rectangulo (1,5,35,35,"black"); 
+            const objetivo = new Rectangulo (950,600,30,30,"blue");
 
-            walls.push(new Rectangulo (140,20,100,20,"gray")); //Obtaculos
-            walls.push(new Rectangulo (140,50,100,20,"gray")); //Obtaculos
-            walls.push(new Rectangulo (20,90,20,100,"gray")); //Obtaculos
-            walls.push(new Rectangulo (50,90,20,100,"gray")); //Obtaculos
+            walls.push(new Rectangulo (0,0,1002,1,"gray")); //Borde arriba
+            walls.push(new Rectangulo (999,0,1,950,"gray")); //Borde izquierda
+            walls.push(new Rectangulo (0,950,1002,1,"gray")); //Borde abajo
+            walls.push(new Rectangulo (0,0,1,950,"gray")); //Borde izquierda
+            walls.push(new Rectangulo (40,0,5,50,"gray")); 
+            walls.push(new Rectangulo (140,0,5,50,"gray")); 
+            walls.push(new Rectangulo (90,50,5,50,"gray")); 
+            walls.push(new Rectangulo (190,50,5,50,"gray")); 
+            walls.push(new Rectangulo (0,100,195,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (195,50,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (250,100,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (245,50,5,250,"gray"));
+            walls.push(new Rectangulo (300,0,5,50,"gray"));
+            walls.push(new Rectangulo (300,50,150,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (350,50,5,100,"gray"));
+            walls.push(new Rectangulo (305,150,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (300,150,5,100,"gray"));
+            walls.push(new Rectangulo (305,245,50,5,"gray")); //Horinzontal
+            walls.push(new Rectangulo (355,245,5,105,"gray"));
+            walls.push(new Rectangulo (150,200,100,5,"gray")); //Horinzontal
+            walls.push(new Rectangulo (200,295,100,5,"gray")); //Horinzontal
+            walls.push(new Rectangulo (100,150,100,5,"gray")); //Horinzontal
+            walls.push(new Rectangulo (0,150,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (100,150,5,50,"gray")); 
+            walls.push(new Rectangulo (55,200,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (50,200,5,50,"gray")); 
+            walls.push(new Rectangulo (50,250,150,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (200,250,5,50,"gray")); 
+            walls.push(new Rectangulo (100,250,5,50,"gray")); 
+            walls.push(new Rectangulo (50,350,355,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (150,300,5,250,"gray"));
+            walls.push(new Rectangulo (50,300,5,50,"gray"));
+            walls.push(new Rectangulo (0,400,100,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (50,400,5,250,"gray"));
+            walls.push(new Rectangulo (50,500,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (100,450,200,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (200,400,150,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (100,450,200,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (100,550,5,50,"gray")); 
+            walls.push(new Rectangulo (105,550,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (100,600,155,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (200,500,5,50,"gray")); 
+            walls.push(new Rectangulo (205,500,50,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (250,500,5,100,"gray")); 
+            walls.push(new Rectangulo (50,650,250,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (300,600,5,100,"gray")); 
+            walls.push(new Rectangulo (350,650,100,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (250,550,100,5,"gray")); //Horizontal
+            walls.push(new Rectangulo (350,550,5,100,"gray")); 
+            walls.push(new Rectangulo (400,250,5,100,"gray")); 
+
+
+
+
+
+
+
+
+
+
 
 // --------- E V E N T O S   D E L   T E C L A D O  -----------------------------
             document.addEventListener("keydown",(e) =>{
@@ -101,11 +157,11 @@
                     switch(dir){
                         case 38: //arriba
                             player.y -= speed;
-                            if(player.y < -50){player.y = 550}
+                            if(player.y < -40){player.y = 950}
                         break;
                         case 40: // abajo
                             player.y += speed;
-                            if(player.y > 550){player.y = 0}
+                            if(player.y > 950){player.y = 0}
                         break;
                         case 39: // derecha
                             player.x += speed;
@@ -113,7 +169,7 @@
                         break;
                         case 37: //izquierda
                             player.x -= speed;
-                            if(player.x < -50){player.x = 1010;}
+                            if(player.x < -40){player.x = 1010;}
                         break;
                     }
 
@@ -151,16 +207,16 @@
                 
                 if (!pause){
                     ctx.fillStyle = "rgb(142, 225, 77)";
-                    ctx.fillRect (0, 0, 1010, 550);
+                    ctx.fillRect (0, 0, 1010, 950);
                     ctx.fillStyle = "black";
                     ctx.font = "15px Tahoma"; //SCORE
                     ctx.fillText("S C O R E: "+score, 780, 25);
-                    ctx.font = "15px Tahoma"; //SCORE
+                    ctx.font = "15px Tahoma"; //TIME
                     ctx.fillText("T I M E: "+time, 920, 25);
                     
-                    ctx.drawImage(image,player.x,player.y,50,50);
+                    ctx.drawImage(image,player.x,player.y,35,35);
 
-                    ctx.drawImage(image2,objetivo.x,objetivo.y,40,40);
+                    ctx.drawImage(image2,objetivo.x,objetivo.y,30,30);
 
                     for (var i = walls.length-1; i >= 0; i--) {
                         walls[i].paint(ctx);   
@@ -168,11 +224,11 @@
 
                 }else{
                     ctx.fillStyle = "RGBA(165, 165, 165 ,0.010)";
-                    ctx.fillRect (0, 0, 1010, 550);
+                    ctx.fillRect (0, 0, 1010, 950);
 
                     ctx.fillStyle = "BLACK" 
-                    ctx.font = "30px Tahoma"; //PAUSE
-                    ctx.fillText("P  A  U  S  E ", 320, 230);
+                    ctx.font = "40px Tahoma"; //PAUSE
+                    ctx.fillText("P  A  U  S  E ", 380, 250);
                 }
             }
 
