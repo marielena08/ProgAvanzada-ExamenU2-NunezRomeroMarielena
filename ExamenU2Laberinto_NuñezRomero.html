@@ -13,6 +13,7 @@
        -  Debe tener música ambiental. 
     -->
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <style>
             body{
                 display: flex;
@@ -21,12 +22,69 @@
                 justify-content: center;
                 background-color:rgb(111, 151, 120);
             }
+            #titulo{
+                width: 50%;
+                height: 80px;
+                padding: 10px 10px;
+                background-color: black;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                text-align: center;
+                color: #AD6908;
+                font-weight: bold;
+                font-family:Verdana;
+                font-size: medium;
+            }
+            #instrucciones{
+                width: 230px;
+                height: 300px;
+                padding: 10px 20px;
+                background-color: black;
+                border-radius: 5px;
+                position: absolute;
+                right: 10px;
+                top: 50%;  
+                transform: translateY(-50%);  
+                font-size: 18px;
+            }
+            legend{
+                color: rgb(255, 72, 0);
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            p{
+                color: rgb(57, 134, 70);
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            li{
+                color: #be7104;
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
             canvas{
-                background-color: rgb(30, 66, 2);
+                background-color: rgb(40, 88, 2);
             }
         </style>
     </head>
     <body>
+        <div id="titulo"> 
+            <h3> -   L A B E R I N T O   - </h3>
+            <h3>Z O M B I E - - C O M E - - C E R E B R O</h3>
+        </div>
+        <div id="instrucciones"> 
+            <fieldset>
+                <legend>INSTRUCCIONES </legend>
+                    <p>Teclas de movimiento</p>
+                    <ul>
+                        <li>Flecha Derecha</li>
+                        <li>Flecha Izquierda</li>
+                        <li>Flecha Arriba</li>
+                        <li>Flecha Abajo</li>
+                    </ul>
+                    <p>Pausa</p>
+                    <ul>
+                        <li>Tecla Espacio</li>
+                    </ul>
+            </fieldset>
+        </div>
         <canvas id="mycanvas" width="1000" height="950"></canvas>
         <script>
 // --------- V A R I A B L E S -----------------------------
@@ -35,7 +93,7 @@
 
             var dir = 0;
             var w_x = 100, w_y = 70;
-            var speed = 1.5;
+            var speed = 1;
             let walls = [];
             let pause = false;
             let score = 0;
@@ -75,7 +133,7 @@
             }
 
             const player = new Rectangulo (1,5,35,35,"black"); 
-            const objetivo = new Rectangulo (950,900,30,30,"blue");
+            const objetivo = new Rectangulo (950,900,30,30,"black");
             paintWalls();
 
 // --------- E V E N T O S   D E L   T E C L A D O  -----------------------------
@@ -155,7 +213,7 @@
             function repaint(){
                 
                 if (!pause){
-                    ctx.fillStyle = "rgb(30, 66, 2)";
+                    ctx.fillStyle = "rgb(40, 88, 2)";
                     ctx.fillRect (0, 0, 1010, 950);
                     ctx.fillStyle = "black";
                     ctx.font = "15px Tahoma"; //SCORE
@@ -192,192 +250,192 @@
             window.requestAnimationFrame(update);
 
             function paintWalls() {
-                walls.push(new Rectangulo (0,0,1002,1,"#AD6908")); //Borde arriba
-                walls.push(new Rectangulo (999,0,1,950,"#AD6908")); //Borde izquierda
-                walls.push(new Rectangulo (0,950,1002,1,"#AD6908")); //Borde abajo
-                walls.push(new Rectangulo (0,0,1,950,"#AD6908")); //Borde izquierda
-                walls.push(new Rectangulo (40,0,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (140,0,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (90,50,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (190,50,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (0,100,195,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (195,50,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (250,100,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (245,50,5,250,"#AD6908"));
-                walls.push(new Rectangulo (300,50,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (350,50,5,100,"#AD6908"));
-                walls.push(new Rectangulo (305,150,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (300,150,5,100,"#AD6908"));
-                walls.push(new Rectangulo (305,245,50,5,"#AD6908")); //Horinzontal
-                walls.push(new Rectangulo (355,245,5,105,"#AD6908"));
-                walls.push(new Rectangulo (150,200,100,5,"#AD6908")); //Horinzontal
-                walls.push(new Rectangulo (200,295,100,5,"#AD6908")); //Horinzontal
-                walls.push(new Rectangulo (100,150,100,5,"#AD6908")); //Horinzontal
-                walls.push(new Rectangulo (0,150,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,150,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (55,200,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (50,200,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (50,250,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (200,250,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (100,250,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (50,350,355,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (150,300,5,250,"#AD6908"));
-                walls.push(new Rectangulo (50,300,5,50,"#AD6908"));
-                walls.push(new Rectangulo (0,400,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (50,400,5,250,"#AD6908"));
-                walls.push(new Rectangulo (50,500,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,450,200,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (200,400,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,450,200,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,550,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (105,550,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,600,155,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (200,500,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (205,500,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (250,500,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (50,650,250,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (300,600,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (350,650,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (250,550,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (350,550,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (400,150,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (400,305,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (450,250,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (450,100,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (350,200,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,250,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,300,55,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,200,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (500,150,55,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (405,100,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,100,5,150,"#AD6908")); 
-                walls.push(new Rectangulo (500,200,5,150,"#AD6908")); 
-                walls.push(new Rectangulo (500,250,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,300,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,350,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (500,50,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (500,50,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (600,150,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,100,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (600,0,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (600,50,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (800,150,5,55,"#AD6908")); 
-                walls.push(new Rectangulo (850,250,5,55,"#AD6908")); 
-                walls.push(new Rectangulo (700,50,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (800,0,5,55,"#AD6908")); 
-                walls.push(new Rectangulo (950,0,5,55,"#AD6908")); 
-                walls.push(new Rectangulo (750,105,5,50,"#AD6908"));
-                walls.push(new Rectangulo (600,150,5,50,"#AD6908"));  
-                walls.push(new Rectangulo (650,150,5,250,"#AD6908"));  
-                walls.push(new Rectangulo (700,200,5,150,"#AD6908"));  
-                walls.push(new Rectangulo (850,50,5,150,"#AD6908"));  
-                walls.push(new Rectangulo (950,100,5,150,"#AD6908"));  
-                walls.push(new Rectangulo (750,100,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (850,200,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,155,5,50,"#AD6908"));  
-                walls.push(new Rectangulo (900,100,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,50,5,50,"#AD6908"));  
-                walls.push(new Rectangulo (750,250,250,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (700,200,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (700,350,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (700,300,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (800,300,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,300,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (850,350,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (850,400,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,450,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (950,500,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (500,400,250,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,450,200,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (650,550,350,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (800,300,5,150,"#AD6908"));  
-                walls.push(new Rectangulo (900,305,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (950,355,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (900,455,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (850,405,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (750,400,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (550,450,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (450,350,5,100,"#AD6908"));
-                walls.push(new Rectangulo (600,500,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (650,550,5,100,"#AD6908")); 
-                walls.push(new Rectangulo (800,550,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (650,450,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (700,500,5,50,"#AD6908")); 
-                walls.push(new Rectangulo (750,500,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (350,400,5,50,"#AD6908"));
-                walls.push(new Rectangulo (350,450,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,450,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (300,450,5,50,"#AD6908"));
-                walls.push(new Rectangulo (300,500,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,500,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,400,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,450,5,200,"#AD6908"));
-                walls.push(new Rectangulo (450,550,5,50,"#AD6908"));
-                walls.push(new Rectangulo (450,600,200,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,550,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (500,650,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,700,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (600,700,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (650,750,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (700,600,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (850,600,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,650,5,50,"#AD6908"));
-                walls.push(new Rectangulo (400,700,5,50,"#AD6908"));
-                walls.push(new Rectangulo (600,650,5,50,"#AD6908"));
-                walls.push(new Rectangulo (700,600,5,105,"#AD6908"));
-                walls.push(new Rectangulo (750,600,5,50,"#AD6908"));
-                walls.push(new Rectangulo (850,600,5,50,"#AD6908"));
-                walls.push(new Rectangulo (950,600,5,205,"#AD6908"));
-                walls.push(new Rectangulo (900,800,5,100,"#AD6908"));
-                walls.push(new Rectangulo (850,750,5,200,"#AD6908"));
-                walls.push(new Rectangulo (800,700,5,200,"#AD6908"));
-                walls.push(new Rectangulo (750,700,5,100,"#AD6908"));
-                walls.push(new Rectangulo (700,800,5,100,"#AD6908"));
-                walls.push(new Rectangulo (750,850,5,50,"#AD6908"));
-                walls.push(new Rectangulo (650,700,5,50,"#AD6908"));
-                walls.push(new Rectangulo (550,700,5,50,"#AD6908"));
-                walls.push(new Rectangulo (600,750,5,50,"#AD6908"));
-                walls.push(new Rectangulo (550,800,5,50,"#AD6908"));
-                walls.push(new Rectangulo (600,850,5,50,"#AD6908"));
-                walls.push(new Rectangulo (550,900,5,50,"#AD6908"));
-                walls.push(new Rectangulo (500,750,5,50,"#AD6908"));
-                walls.push(new Rectangulo (500,850,5,50,"#AD6908"));
-                walls.push(new Rectangulo (850,750,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,800,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (900,900,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (950,850,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (700,900,105,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (600,800,155,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,750,55,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (550,850,105,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (600,900,55,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (450,800,105,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (400,750,105,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (200,700,205,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,700,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (150,800,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (250,800,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (350,800,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (350,850,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (100,850,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (50,900,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (200,900,50,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (250,750,100,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (750,650,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (800,700,150,5,"#AD6908")); //Horizontal
-                walls.push(new Rectangulo (50,700,5,200,"#AD6908"));
-                walls.push(new Rectangulo (100,700,5,150,"#AD6908"));
-                walls.push(new Rectangulo (150,700,5,50,"#AD6908"));
-                walls.push(new Rectangulo (200,700,5,150,"#AD6908"));
-                walls.push(new Rectangulo (150,900,5,50,"#AD6908"));
-                walls.push(new Rectangulo (250,750,5,50,"#AD6908"));
-                walls.push(new Rectangulo (300,800,5,100,"#AD6908"));
-                walls.push(new Rectangulo (250,850,5,55,"#AD6908"));
-                walls.push(new Rectangulo (350,850,5,55,"#AD6908"));
-                walls.push(new Rectangulo (400,800,5,55,"#AD6908"));
-                walls.push(new Rectangulo (350,750,5,55,"#AD6908"));
-                walls.push(new Rectangulo (450,900,5,100,"#AD6908"));
-                walls.push(new Rectangulo (350,900,50,5,"#AD6908")); //Horizontal  
+                walls.push(new Rectangulo (0,0,1002,1,"#be7104")); //Borde arriba
+                walls.push(new Rectangulo (999,0,1,950,"#be7104")); //Borde izquierda
+                walls.push(new Rectangulo (0,950,1002,1,"#be7104")); //Borde abajo
+                walls.push(new Rectangulo (0,0,1,950,"#be7104")); //Borde izquierda
+                walls.push(new Rectangulo (40,0,5,50,"#be7104")); 
+                walls.push(new Rectangulo (140,0,5,50,"#be7104")); 
+                walls.push(new Rectangulo (90,50,5,50,"#be7104")); 
+                walls.push(new Rectangulo (190,50,5,50,"#be7104")); 
+                walls.push(new Rectangulo (0,100,195,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (195,50,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (250,100,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (245,50,5,250,"#be7104"));
+                walls.push(new Rectangulo (300,50,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (350,50,5,100,"#be7104"));
+                walls.push(new Rectangulo (305,150,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (300,150,5,100,"#be7104"));
+                walls.push(new Rectangulo (305,245,50,5,"#be7104")); //Horinzontal
+                walls.push(new Rectangulo (355,245,5,105,"#be7104"));
+                walls.push(new Rectangulo (150,200,100,5,"#be7104")); //Horinzontal
+                walls.push(new Rectangulo (200,295,100,5,"#be7104")); //Horinzontal
+                walls.push(new Rectangulo (100,150,100,5,"#be7104")); //Horinzontal
+                walls.push(new Rectangulo (0,150,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,150,5,50,"#be7104")); 
+                walls.push(new Rectangulo (55,200,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (50,200,5,50,"#be7104")); 
+                walls.push(new Rectangulo (50,250,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (200,250,5,50,"#be7104")); 
+                walls.push(new Rectangulo (100,250,5,50,"#be7104")); 
+                walls.push(new Rectangulo (50,350,355,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (150,300,5,250,"#be7104"));
+                walls.push(new Rectangulo (50,300,5,50,"#be7104"));
+                walls.push(new Rectangulo (0,400,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (50,400,5,250,"#be7104"));
+                walls.push(new Rectangulo (50,500,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,450,200,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (200,400,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,450,200,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,550,5,50,"#be7104")); 
+                walls.push(new Rectangulo (105,550,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,600,155,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (200,500,5,50,"#be7104")); 
+                walls.push(new Rectangulo (205,500,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (250,500,5,100,"#be7104")); 
+                walls.push(new Rectangulo (50,650,250,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (300,600,5,100,"#be7104")); 
+                walls.push(new Rectangulo (350,650,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (250,550,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (350,550,5,100,"#be7104")); 
+                walls.push(new Rectangulo (400,150,5,100,"#be7104")); 
+                walls.push(new Rectangulo (400,305,5,50,"#be7104")); 
+                walls.push(new Rectangulo (450,250,5,50,"#be7104")); 
+                walls.push(new Rectangulo (450,100,5,100,"#be7104")); 
+                walls.push(new Rectangulo (350,200,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,250,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,300,55,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,200,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (500,150,55,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (405,100,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,100,5,150,"#be7104")); 
+                walls.push(new Rectangulo (500,200,5,150,"#be7104")); 
+                walls.push(new Rectangulo (500,250,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,300,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,350,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (500,50,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (500,50,5,50,"#be7104")); 
+                walls.push(new Rectangulo (600,150,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,100,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (600,0,5,50,"#be7104")); 
+                walls.push(new Rectangulo (600,50,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (800,150,5,55,"#be7104")); 
+                walls.push(new Rectangulo (850,250,5,55,"#be7104")); 
+                walls.push(new Rectangulo (700,50,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (800,0,5,55,"#be7104")); 
+                walls.push(new Rectangulo (950,0,5,55,"#be7104")); 
+                walls.push(new Rectangulo (750,105,5,50,"#be7104"));
+                walls.push(new Rectangulo (600,150,5,50,"#be7104"));  
+                walls.push(new Rectangulo (650,150,5,250,"#be7104"));  
+                walls.push(new Rectangulo (700,200,5,150,"#be7104"));  
+                walls.push(new Rectangulo (850,50,5,150,"#be7104"));  
+                walls.push(new Rectangulo (950,100,5,150,"#be7104"));  
+                walls.push(new Rectangulo (750,100,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (850,200,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,155,5,50,"#be7104"));  
+                walls.push(new Rectangulo (900,100,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,50,5,50,"#be7104"));  
+                walls.push(new Rectangulo (750,250,250,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (700,200,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (700,350,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (700,300,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (800,300,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,300,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (850,350,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (850,400,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,450,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (950,500,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (500,400,250,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,450,200,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (650,550,350,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (800,300,5,150,"#be7104"));  
+                walls.push(new Rectangulo (900,305,5,100,"#be7104")); 
+                walls.push(new Rectangulo (950,355,5,100,"#be7104")); 
+                walls.push(new Rectangulo (900,455,5,100,"#be7104")); 
+                walls.push(new Rectangulo (850,405,5,100,"#be7104")); 
+                walls.push(new Rectangulo (750,400,5,100,"#be7104")); 
+                walls.push(new Rectangulo (550,450,5,100,"#be7104")); 
+                walls.push(new Rectangulo (450,350,5,100,"#be7104"));
+                walls.push(new Rectangulo (600,500,5,100,"#be7104")); 
+                walls.push(new Rectangulo (650,550,5,100,"#be7104")); 
+                walls.push(new Rectangulo (800,550,5,50,"#be7104")); 
+                walls.push(new Rectangulo (650,450,5,50,"#be7104")); 
+                walls.push(new Rectangulo (700,500,5,50,"#be7104")); 
+                walls.push(new Rectangulo (750,500,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (350,400,5,50,"#be7104"));
+                walls.push(new Rectangulo (350,450,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,450,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (300,450,5,50,"#be7104"));
+                walls.push(new Rectangulo (300,500,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,500,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,400,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,450,5,200,"#be7104"));
+                walls.push(new Rectangulo (450,550,5,50,"#be7104"));
+                walls.push(new Rectangulo (450,600,200,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,550,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (500,650,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,700,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (600,700,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (650,750,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (700,600,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (850,600,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,650,5,50,"#be7104"));
+                walls.push(new Rectangulo (400,700,5,50,"#be7104"));
+                walls.push(new Rectangulo (600,650,5,50,"#be7104"));
+                walls.push(new Rectangulo (700,600,5,105,"#be7104"));
+                walls.push(new Rectangulo (750,600,5,50,"#be7104"));
+                walls.push(new Rectangulo (850,600,5,50,"#be7104"));
+                walls.push(new Rectangulo (950,600,5,205,"#be7104"));
+                walls.push(new Rectangulo (900,800,5,100,"#be7104"));
+                walls.push(new Rectangulo (850,750,5,200,"#be7104"));
+                walls.push(new Rectangulo (800,700,5,200,"#be7104"));
+                walls.push(new Rectangulo (750,700,5,100,"#be7104"));
+                walls.push(new Rectangulo (700,800,5,100,"#be7104"));
+                walls.push(new Rectangulo (750,850,5,50,"#be7104"));
+                walls.push(new Rectangulo (650,700,5,50,"#be7104"));
+                walls.push(new Rectangulo (550,700,5,50,"#be7104"));
+                walls.push(new Rectangulo (600,750,5,50,"#be7104"));
+                walls.push(new Rectangulo (550,800,5,50,"#be7104"));
+                walls.push(new Rectangulo (600,850,5,50,"#be7104"));
+                walls.push(new Rectangulo (550,900,5,50,"#be7104"));
+                walls.push(new Rectangulo (500,750,5,50,"#be7104"));
+                walls.push(new Rectangulo (500,850,5,50,"#be7104"));
+                walls.push(new Rectangulo (850,750,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,800,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (900,900,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (950,850,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (700,900,105,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (600,800,155,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,750,55,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (550,850,105,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (600,900,55,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (450,800,105,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (400,750,105,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (200,700,205,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,700,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (150,800,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (250,800,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (350,800,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (350,850,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (100,850,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (50,900,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (200,900,50,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (250,750,100,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (750,650,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (800,700,150,5,"#be7104")); //Horizontal
+                walls.push(new Rectangulo (50,700,5,200,"#be7104"));
+                walls.push(new Rectangulo (100,700,5,150,"#be7104"));
+                walls.push(new Rectangulo (150,700,5,50,"#be7104"));
+                walls.push(new Rectangulo (200,700,5,150,"#be7104"));
+                walls.push(new Rectangulo (150,900,5,50,"#be7104"));
+                walls.push(new Rectangulo (250,750,5,50,"#be7104"));
+                walls.push(new Rectangulo (300,800,5,100,"#be7104"));
+                walls.push(new Rectangulo (250,850,5,55,"#be7104"));
+                walls.push(new Rectangulo (350,850,5,55,"#be7104"));
+                walls.push(new Rectangulo (400,800,5,55,"#be7104"));
+                walls.push(new Rectangulo (350,750,5,55,"#be7104"));
+                walls.push(new Rectangulo (450,900,5,100,"#be7104"));
+                walls.push(new Rectangulo (350,900,50,5,"#be7104")); //Horizontal  
             }
         </script>        
     </body>
